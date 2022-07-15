@@ -58,9 +58,11 @@ final class ImageStore {
         if let index = images.index(forKey: name) { return index }
         
         guard
-            let url = Bundle.main.url(forResource: name, withExtension: "jpg"),
-            let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
-            let image = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+//            let url = Bundle.main.url(forResource: name, withExtension: "jpg"),
+//            let imageSource = CGImageSourceCreateWithURL(url as NSURL, nil),
+//            let image = CGImageSourceCreateImageAtIndex(imageSource, 0, nil)
+            // to simplify
+            let image = UIImage(named: name + ".jpg")?.cgImage
         else {
             fatalError("Couldn't load image \(name).jpg from main bundle.")
         }
@@ -70,15 +72,20 @@ final class ImageStore {
     }
     
     fileprivate func _sizeImage(_ image: CGImage, to size: Int) -> CGImage {
+        // context nil error debug:
+        // enable env: CGBITMAP_CONTEXT_LOG_ERRORS = 1 (edit scheme - run - arg)
+        // bitmapInfo -> not be none
+        // bytes -> %4 == 0
+        let bytesPerRow = Int(ceil(Float(image.bytesPerRow) / 4)) * 4
         guard
             let colorSpace = image.colorSpace,
             let context = CGContext(
                 data: nil,
                 width: size, height: size,
                 bitsPerComponent: image.bitsPerComponent,
-                bytesPerRow: image.bytesPerRow,
+                bytesPerRow: bytesPerRow,
                 space: colorSpace,
-                bitmapInfo: image.bitmapInfo.rawValue)
+                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
             else {
                 fatalError("Couldn't create graphics context.")
         }
