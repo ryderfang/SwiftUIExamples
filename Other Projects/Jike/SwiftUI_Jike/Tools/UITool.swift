@@ -89,21 +89,26 @@ final class ImageStore {
     }
     
     fileprivate func _sizeImage(_ image: CGImage, to size: Int) -> CGImage {
+        // context nil error debug:
+        // enable env: CGBITMAP_CONTEXT_LOG_ERRORS = 1 (edit scheme - run - arg)
+        // bitmapInfo -> not be none
+        // bytes -> %4 == 0
+        let bytesPerRow = Int(ceil(Float(image.bytesPerRow) / 4)) * 4
         guard
             let colorSpace = image.colorSpace,
             let context = CGContext(
                 data: nil,
                 width: size, height: size,
                 bitsPerComponent: image.bitsPerComponent,
-                bytesPerRow: image.bytesPerRow,
+                bytesPerRow: bytesPerRow,
                 space: colorSpace,
-                bitmapInfo: image.bitmapInfo.rawValue)
+                bitmapInfo: CGImageAlphaInfo.noneSkipLast.rawValue)
             else {
                 fatalError("Couldn't create graphics context.")
         }
         context.interpolationQuality = .high
         context.draw(image, in: CGRect(x: 0, y: 0, width: size, height: size))
-        
+
         if let sizedImage = context.makeImage() {
             return sizedImage
         } else {
