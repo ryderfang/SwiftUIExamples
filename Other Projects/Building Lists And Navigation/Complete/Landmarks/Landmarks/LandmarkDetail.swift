@@ -23,6 +23,8 @@ struct LandmarkDetail: View {
                 Text(landmark.name)
                     .font(.title)
 
+                Spacer().frame(height: 10)
+
                 HStack(alignment: .top) {
                     Text(landmark.park)
                         .font(.subheadline)

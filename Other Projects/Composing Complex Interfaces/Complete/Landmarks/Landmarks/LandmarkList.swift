@@ -7,6 +7,7 @@ A view showing a list of landmarks.
 
 import SwiftUI
 
+// TODO: 顶部有两个空行，怎么消？
 struct LandmarkList: View {
     @EnvironmentObject private var userData: UserData
     
@@ -29,13 +30,14 @@ struct LandmarkList: View {
             }
             .navigationBarTitle(Text("Landmarks"), displayMode: .large)
         }
+        .padding()
     }
 }
 
 #if DEBUG
 struct LandmarksList_Previews: PreviewProvider {
     static var previews: some View {
-        ForEach(["iPhone SE", "iPhone XS Max"], id: \.self) { deviceName in
+        ForEach([/*"iPhone SE", */"iPhone XS Max"], id: \.self) { deviceName in
             LandmarkList()
                 .previewDevice(PreviewDevice(rawValue: deviceName))
                 .previewDisplayName(deviceName)

@@ -39,7 +39,8 @@ struct ConverterView : View {
         return ZStack(alignment: Alignment.bottomTrailing) {
             NavigationView {
             VStack(alignment: .leading){
-                Text("From:").bold().foregroundColor(.gray)
+                let extractedExpr: Text = Text("From:")
+                extractedExpr.bold().foregroundColor(.gray)
                 HStack{
                     // Flag
                     Text("\(userData.baseCurrency.flag)").padding(5)

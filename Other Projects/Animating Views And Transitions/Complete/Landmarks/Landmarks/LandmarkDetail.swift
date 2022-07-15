@@ -44,6 +44,8 @@ struct LandmarkDetail: View {
                         }
                     }
                 }
+
+                Spacer().frame(maxWidth: .infinity, maxHeight: 10)
                 
                 HStack(alignment: .top) {
                     Text(verbatim: landmark.park)

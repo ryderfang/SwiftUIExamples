@@ -29,6 +29,7 @@ final class Store<State, Action>: ObservableObject {
 
         lock.unlock()
 
+        // TODO: not work
         objectWillChange.send(newState)
     }
 }

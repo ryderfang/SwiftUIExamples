@@ -16,16 +16,25 @@ struct CounterView : View {
         }
     }
 
+    // enough ?!
+    @State private var textString = 0
+
     var body: some View {
         VStack {
-            Text("\(store.state)")
+            Text("\(textString)")
 
             HStack {
-                Button(action: { self.store.dispatch(action: .decrement) }) {
+                Button(action: {
+                    self.store.dispatch(action: .decrement)
+                    textString -= 1
+                }) {
                     Text("Decrement")
                 }
 
-                Button(action: { self.store.dispatch(action: .increment) }) {
+                Button(action: {
+                    self.store.dispatch(action: .increment)
+                    textString += 1
+                }) {
                     Text("Increment")
                 }
             }

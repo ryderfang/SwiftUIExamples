@@ -65,6 +65,12 @@ class ViewController: UIViewController {
         
         countLabel.bottomAnchor.constraint(equalTo: button.topAnchor, constant: -30).isActive = true
         countLabel.centerXAnchor.constraint(equalTo: button.centerXAnchor).isActive = true
+
+        // only iPad supported
+        if !UIApplication.shared.supportsMultipleScenes {
+            button.isHidden = true
+            swiftUIbutton.isHidden = true
+        }
     }
 
     @objc private func openScene(_ sender: Any) {

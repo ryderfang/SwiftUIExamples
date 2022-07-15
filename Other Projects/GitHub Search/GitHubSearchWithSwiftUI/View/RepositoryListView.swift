@@ -26,6 +26,7 @@ struct RepositoryListView : View {
                     .padding(EdgeInsets(top: 0, leading: 8, bottom: 0, trailing: 8))
                     .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                     .background(RoundedRectangle(cornerRadius: 8).strokeBorder(Color.gray, lineWidth: 2))
+                    .autocapitalization(.none)
 
                 Button(action: { self.viewModel.search() }) {
                     Text("Search")
