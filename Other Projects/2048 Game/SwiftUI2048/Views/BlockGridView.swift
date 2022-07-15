@@ -70,7 +70,8 @@ struct BlockGridView : View {
         ZStack {
             ForEach(
                 self.matrix.flatten.map { IdentifiableIndexedBlock(indexedBlock: $0) }
-            ) { block in
+            ) { blk in
+                let block = blk.indexedBlock
                 self.createBlock(block.item)
                     .frame(width: 65, height: 65, alignment: .center)
                     .position(x: CGFloat(block.index.0) * (65 + 12) + 32.5 + 12,
